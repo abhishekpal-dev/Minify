@@ -1,3 +1,35 @@
 spring:
   application:
-    name: demo
+    name: Minify
+  datasource:
+    url: jdbc:postgresql://localhost:5432/Minify
+    username: postgres
+    password: secret
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: 6379
+  cache:
+    type: redis
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:your-256-bit-secret-key-here}
+    expiration: 900000  # 15 minutes in ms
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
